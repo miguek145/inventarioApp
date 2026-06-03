@@ -1,0 +1,1691 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --rosa: #d84b8f;
+    --negro: #2a2428;
+    --blanco: white;
+    --gris:rgb(202, 200, 200);
+}
+
+
+body{
+   
+    overflow-x: hidden;
+    background-image: url("../img/fondoLogoEcosMonitor.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* Peso normal estándar */
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+
+    /* Recomendado: suavizado de fuentes para mejores acabados */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-bottom: 100px;
+
+}
+
+@media (max-width:900px){
+    
+    body{
+         background-image: url("../img/fondoLogoEcosResponsive.png");
+
+    }
+}
+
+.indicadorUsuarioLogoneado{
+    margin-top: 10px; 
+    text-align: left;
+
+}
+
+/*<-----------------------TÍTULOS---------------------------->*/
+
+main>h2,main>h3{
+    text-align: center;
+}
+
+main>h2:first-of-type{
+    margin-top: 150px;
+}
+
+main>h3:first-of-type{
+    margin-top: 20px;
+}
+
+/*<----------------------BOTONES A ----------------------------------->*/
+a{
+    text-decoration: none;
+    text-align: center;
+    color: var(--negro);
+    background-color: var(--blanco);
+}
+
+
+/*<-----------------------BOTONES VOLVER Y BOTON AÑADIR PRECIO UNITARIO-------------------------------->*/
+
+.botonVolver,.botonAddProductoUnitario,.botonReubicarProductoUnitario,.botonAddProductoReserva{
+    position: absolute;
+    top:12vh;
+    padding: 10px;
+    background-color: var(--rosa);
+    color: var(--blanco);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.botonVolver:hover,.botonAddProductoUnitario:hover,.botonReubicarProductoUnitario:hover {
+    background-color: var(--blanco);
+    color: var(--rosa);
+    border: 2px solid var(--rosa);
+}
+
+.botonVolver{
+    right:10vw;
+    border: none;
+}
+
+.botonAddProductoUnitario{
+    left:10vw;
+}
+
+.botonReubicarProductoUnitario{
+    left: 30vw;
+}
+
+@media (max-width:600px){
+    
+    .botonVolver,.botonAddProductoUnitario,.botonReubicarProductoUnitario {
+        top: 8vh;
+    }
+
+    .botonReubicarProductoUnitario {
+        left: 45vw;
+       
+    }
+
+}
+
+
+/*<-------------------BOTONES FORMULARIOS SUBMIT Y RESETS-------------->*/
+
+input[type="submit"],input[type="reset"]{
+    margin-top: 20px;
+    padding: 5px;
+    background-color:var(--blanco);
+    color: var(--negro);
+    border: 1px solid var(--negro);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/*<------------------BOTONES DE MENUS----------------------------->  */
+
+.boton {
+    margin: 20px;
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid var(--negro);
+
+}
+
+
+a:hover,input[type="submit"]:hover,input[type="reset"]:hover{
+    
+    background-color: var(--negro);
+    color: var(--blanco);
+    transition: all 0.3s ease; 
+    
+}
+/* <-----------------BARRA DE NAVEGACIÓN---------------------------> */
+
+header{
+    position: fixed;
+    top: 0vh;
+    z-index: 1;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* Esta transición manejará el movimiento tanto al abrir como al cerrar */
+    transition: transform 0.5s ease-in-out; 
+    background-color: var(--rosa);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h2{
+    padding-left: 5px;
+    color: var(--blanco);
+}
+
+header a{
+    display: block;
+    text-decoration: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 200px;
+    background-color: var(--blanco);
+    color: var(--rosa);
+}
+
+header nav ul{
+    list-style: none;
+}
+
+header>nav>ul{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+}
+
+/* estilos para los subindices del menú de navegación */
+header>nav>ul>li>ul{
+    position: absolute;
+    top: 100%;
+    display: none;
+}
+
+h1,h2,h3,h4{
+    text-align: center;
+}
+
+header>nav>ul>li>ul>li>a{
+    background-color: var(--gris);
+}
+
+@media (min-width:900px){
+    header>nav>ul>li:hover >ul{
+        display: block;
+    }
+}
+
+.menuHamburguesa{
+    z-index: -1;
+    width: 40px;
+    position: absolute;
+    height: 40px;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@media (max-width:900px){
+    
+    /* Evita que aparezca la barra de scroll horizontal en el móvil al deslizar el menú */
+    body {
+        overflow-x: hidden;
+    }
+
+    .menuHamburguesa{        
+        z-index: 2;
+        border: 2px solid var(--negro);
+    }
+
+     .menuHamburguesa:hover{
+        background-color: var(--negro);
+     }
+
+    .menuHamburguesa:hover>span{
+        background-color: var(--blanco);
+    }
+
+    .menuHamburguesa>span{
+        height: 2px;
+        width: 90%;
+        background-color: var(--negro);
+        transition: all 0.5s ease-in-out;
+    }
+
+    header{
+        /* Estado inicial: escondido a la derecha */
+        transform: translateX(100%); 
+        position: fixed; /* Cambiado a fixed para que cubra bien la pantalla al deslizar */
+        top: 0%;   
+        right: 0;
+        flex-direction: column-reverse;
+        width: 100vw;
+        height: auto;
+    }
+
+    header>nav{
+        width: 100vw;
+    }
+
+    header>nav>ul{
+        flex-direction: column;
+    }
+
+    header ul{
+        width: 100%;
+    }
+
+    header a{
+        width: 100%;
+    }
+
+    /* Los submenús en móvil empujan el contenido, no flotan encima */
+    header>nav>ul>li>ul {
+        position: relative;
+        top: 0;
+    }
+    
+    .mostrarSubmenuMobile{
+        display: block !important; 
+    }
+
+    /* Al añadir esta clase con JS, el menú viaja de manera fluida al centro (0) */
+    .moverHeader{
+        transform: translateX(0);
+    }
+
+    /* transformaciones barras del menuHamburguesa */
+    .span1{
+        transform: translateY(13px) rotateZ(45deg);
+    }
+
+    .span2{
+        opacity: 0;
+    }
+
+    .span3{
+        transform: translateY(-11px) rotateZ(-45deg);
+    }
+}
+/* <----------------------------------MAIN PAGE-----------------------------------------> */
+
+.encabezadoTablaTiposProductos {
+    margin-top: 100px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--negro);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.contenedorTablaTipos {
+    display: grid;
+    /* Ajuste automático inteligente: mínimo 180px por botón, se acomodan solos */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    
+    margin: 30px auto;
+    padding: 40px 30px;
+    width: 85vw;
+    max-width: 1000px; /* Evita que en pantallas gigantes la barra se estire infinitamente */
+    
+    background-color: var(--rosa);
+    border-radius: 12px; /* Bordes más suaves y modernos */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Sombra más sutil y profunda */
+}
+
+/* Estilo para cada botón individual (tarjeta) */
+.contenedorTablaTipos .tarjeta-tipo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px; /* Todos los botones medirán exactamente lo mismo de alto */
+    padding: 15px;
+    
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    
+    background-color: var(--blanco);
+    color: var(--rosa);
+    border: none; /* Quitamos el borde negro duro */
+    border-radius: 8px;
+    
+    /* Transición suave para todos los estados */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Efecto Hover moderno: el botón se eleva y cambia de color de forma elegante */
+.contenedorTablaTipos .tarjeta-tipo:hover {
+    background-color: var(--blanco); /* Mantiene el fondo blanco */
+    color: var(--rosa);
+    transform: translateY(-4px); /* Efecto de flotar hacia arriba */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al flotar */
+}
+
+
+
+@media (max-width: 900px) {
+    .encabezadoTablaTiposProductos {
+        margin-top: 60px;
+        font-size: 1.4rem;
+    }
+    
+    .contenedorTablaTipos {
+        width: 92vw;
+        padding: 30px 20px;
+        gap: 15px;
+        /* En móviles pequeños pasa automáticamente a 2 columnas gracias al auto-fit anterior */
+    }
+}
+
+/* <----------------------------------TABLE PRODUCT PAGE-----------------------------------------> */
+
+#nombreTipoProductos {
+    text-align: center;
+    color: var(--rosa);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* --- BUSCADOR --- */
+.contenedorPadreBuscadores {
+    margin: 20px auto;
+    padding: 15px 20px;
+    width: 95vw;
+    max-width: 1200px;
+    background-color: var(--rosa);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contenedorPadreBuscadores > h3 {
+    padding-bottom: 10px;
+    color: var(--blanco);
+    font-size: 1.2rem;
+}
+
+.contenedorBuscadores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--blanco);
+    border-radius: 8px;
+}
+
+.contenedorBuscadores div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contenedorBuscadores .bloque-botones-buscar {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.contenedorBuscadores label {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #555;
+}
+
+.contenedorBuscadores input, 
+.contenedorBuscadores select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 11pt;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.contenedorBuscadores input:focus, 
+.contenedorBuscadores select:focus {
+    border-color: var(--rosa);
+}
+
+.contenedorBuscadores button {
+    padding: 8px 18px;
+    font-size: 11pt;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#botonBuscarProducto {
+    background-color: var(--rosa);
+    color: var(--blanco);
+    margin-right: 10px;
+}
+
+#botonBuscarProducto:hover {
+    background-color: var(--negro);
+}
+
+#botonLimpiarBuscadorProducto {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+#botonLimpiarBuscadorProducto:hover {
+    background-color: #ccc;
+}
+
+/* --- TABLA DE INVENTARIO --- */
+.tablaProductos {
+    margin: 30px auto;
+    width: 95vw;
+    max-width: 1200px;
+    background-color: var(--blanco);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.encabezadoTablaProductos {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    background-color: var(--rosa);
+    color: var(--blanco);
+    padding: 12px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.encabezadoTablaProductos div:first-child {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.contenedorFilaProducto {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    margin-top: 8px;
+    align-items: center;
+}
+
+/* Caja de contenido dinámico (Los enlaces que cambian de color) */
+.tablaProductos .contenido {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    text-decoration: none;
+    padding: 14px 10px;
+    border-radius: 6px;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tablaProductos .contenido:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.tablaProductos .contenido p {
+    margin: 0;
+    font-size: 10.5pt;
+}
+
+/* Botones de acción en la tabla */
+.contenedorBotonesTablaProductos {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.btn-tabla {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 9.5pt;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    text-align: center;
+    flex: 1;
+}
+
+.btn-edit {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.btn-edit:hover {
+    background-color: var(--negro);
+    color: var(--blanco);
+    border-color: var(--negro);
+}
+
+.btn-delete {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.btn-delete:hover {
+    background-color: #c62828;
+    color: var(--blanco);
+    border-color: #c62828;
+}
+
+/* --- PAGINACIÓN --- */
+#contenedorBotonesSiguienteAnterior {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+#contenedorBotonesSiguienteAnterior button {
+    background-color: var(--rosa);
+    color: var(--blanco);
+    border: none;
+    padding: 10px 20px;
+    font-size: 11pt;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#contenedorBotonesSiguienteAnterior button:hover {
+    background-color: var(--negro);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 950px) {
+    .contenedorBuscadores {
+        grid-template-columns: 1fr;
+    }
+    .contenedorBuscadores .bloque-botones-buscar {
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+    .encabezadoTablaProductos {
+        display: none; /* Ocultamos cabeceras rígidas en pantallas pequeñas */
+    }
+    .contenedorFilaProducto {
+        grid-template-columns: 1fr;
+        background: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 15px;
+        gap: 10px;
+    }
+    .tablaProductos .contenido {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        text-align: left;
+    }
+    .contenedorBotonesTablaProductos {
+        width: 100%;
+    }
+}
+/*<--------------------------TABLE PRODUCT UNITARIOS---------------------->*/
+
+.tituloTablaProductosUnitarios{
+    margin-top: 140px;
+}
+
+/* Contenedor para alinear los botones de arriba */
+.contenedor-acciones-superiores {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px auto;
+    width: 95vw;
+    max-width: 1200px;
+}
+
+.btn-superior {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--rosa);
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.btn-superior:hover {
+    background-color: var(--negro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tabla general */
+.tablaProductosUnitarios {
+    margin: 30px auto;
+    width: 95vw;
+    max-width: 1200px;
+    background-color: var(--blanco);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.encabezadoTablaProductosUnitarios {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    background-color: var(--rosa);
+    color: var(--blanco);
+    padding: 14px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.encabezadoTablaProductosUnitarios > div:first-child {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+
+.filaProductoUnitario {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    margin-top: 8px;
+    align-items: center;
+}
+
+.contenidoProductoUnitario {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    align-items: center;
+    padding: 14px 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #eef2f3;
+    border-radius: 6px;
+}
+
+.contenidoProductoUnitario p {
+    margin: 0;
+    font-size: 10.5pt;
+    color: #333;
+}
+
+.contenidoProductoUnitario .sin-asignar {
+    color: #999;
+    font-style: italic;
+}
+
+/* Botones de acción internos */
+.contenedorBotonesTablaProductosUnitarios {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.btn-tabla {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 9.5pt;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    text-align: center;
+    flex: 1;
+}
+
+.btn-edit {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.btn-edit:hover {
+    background-color: var(--negro);
+    color: var(--blanco);
+    border-color: var(--negro);
+}
+
+.btn-delete {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.btn-delete:hover {
+    background-color: #c62828;
+    color: var(--blanco);
+    border-color: #c62828;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .contenedor-acciones-superiores {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 15px;
+    }
+    
+    .btn-superior {
+        text-align: center;
+    }
+
+    .encabezadoTablaProductosUnitarios {
+        display: none;
+    }
+
+    .filaProductoUnitario {
+        grid-template-columns: 1fr;
+        background: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 15px;
+        gap: 10px;
+    }
+
+    .contenidoProductoUnitario {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        text-align: left;
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+}
+
+/*<-------------------------TABLE PRODUCT RESERVAS------------------------->*/
+
+.tituloTablaProductoReservas {
+    margin-top: 150px;
+    text-align: center;
+}
+
+/* --- TOOLBAR (Botón + Buscador) --- */
+.toolbar-productos-reserva {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    width: 95vw;
+    max-width: 1200px;
+    gap: 20px;
+}
+
+.btn-superior {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    background-color: var(--rosa);
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Evita que el texto del botón se parta en dos líneas */
+}
+
+.btn-superior:hover {
+    background-color: var(--negro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.contenedor-buscador {
+    flex-grow: 1;
+    max-width: 400px; /* Tamaño máximo del buscador */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.contenedor-buscador input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 30px; /* Diseño de píldora moderna */
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: var(--blanco);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.contenedor-buscador input:focus {
+    border-color: var(--rosa);
+    box-shadow: 0 0 8px rgba(216, 75, 143, 0.3); /* Brillo rosa al hacer clic */
+}
+
+
+/* --- TABLA PRINCIPAL --- */
+.tablaProductosReserva {
+    margin: 20px auto 40px auto;
+    width: 95vw;
+    max-width: 1200px;
+    background-color: var(--blanco);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.encabezadoTablaProductosReserva {
+    display: grid;
+    grid-template-columns: 60% 40%; 
+    background-color: var(--rosa);
+    color: var(--blanco);
+    padding: 14px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.encabezadoTablaProductosReserva > div:first-child {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+
+.filaProductoReserva {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    margin-top: 8px;
+    align-items: center;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+
+.filaProductoReserva:hover .contenidoProductoReserva {
+    background-color: #f1f1f1;
+}
+
+.contenidoProductoReserva {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    align-items: center;
+    padding: 14px 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #eef2f3;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.contenidoProductoReserva p {
+    margin: 0;
+    font-size: 10.5pt;
+    color: #333;
+}
+
+.contenedorBotonesTablaProductosReserva {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 10px;
+}
+
+.btn-tabla {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 10px;
+    font-size: 9pt;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    flex: 1; 
+    text-align: center;
+}
+
+.btn-asignar {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #bbdefb;
+}
+.btn-asignar:hover {
+    background-color: #1565c0;
+    color: var(--blanco);
+}
+
+.btn-agregar {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+.btn-agregar:hover {
+    background-color: #2e7d32;
+    color: var(--blanco);
+}
+
+.btn-edit {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
+}
+.btn-edit:hover {
+    background-color: var(--negro);
+    color: var(--blanco);
+    border-color: var(--negro);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    /* En móvil, ponemos el buscador debajo del botón */
+    .toolbar-productos-reserva {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .contenedor-buscador {
+        max-width: 100%;
+    }
+
+    .btn-superior {
+        justify-content: center;
+    }
+
+    .encabezadoTablaProductosReserva {
+        display: none;
+    }
+
+    .filaProductoReserva {
+        grid-template-columns: 1fr;
+        background: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 15px;
+        gap: 10px;
+    }
+
+    .contenidoProductoReserva {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        text-align: left;
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    .contenedorBotonesTablaProductosReserva {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+    
+    .btn-tabla {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/*<----------------------------LOGIN PAGE------------------------------->*/
+
+
+.contenedorLogin{
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+    height: 65vh;
+    background-size: cover;
+    margin: 40px auto;
+    border-radius: 60px;
+    height: 80vh;
+    color: var(--blanco);
+    background-color: var(--rosa);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+
+}
+
+.contenedorLogin>div:first-child,.contenedorLogin>div:nth-child(2){
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+
+}
+
+
+.contenedorLogin>div:nth-child(2){
+    justify-content: center;
+    background-color: var(--blanco);
+    border-top-right-radius: 60px;
+    border-bottom-right-radius: 60px;
+}
+
+h1{
+    margin-top: 100px;
+    margin-bottom: 75px;
+    text-align: center;
+    font-size: 2vw;
+}
+
+
+.formularioInicial{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formularioInicial a{
+    align-self: flex-start;
+}
+
+.formularioInicial label{
+    margin-top: 25px;
+    font-size: 1.5vw;
+    align-self: flex-start;
+}
+
+.formularioInicial input{
+    cursor: pointer;
+    font-size: 100%;
+}
+
+.formularioInicial input[type=text],.formularioInicial input[type=password]{
+    margin-top: 10px;
+    border: none;
+    border-bottom: 3px solid grey;
+    background-color: transparent;
+    width: 100%;
+    height: 15%;
+    color: var(--blanco);
+
+}
+
+.formularioInicial input[type=text]:hover,.formularioInicial input[type=password]:hover{
+    border-bottom: 3px solid rgb(255,255,255) ;
+}
+
+.formularioInicial input[type=text]:focus,.formularioInicial input[type=password]:focus{
+    outline: none;
+    border-bottom: 3px solid rgb(255,255,255) ;
+}
+
+.formularioInicial input[type=submit]{
+    margin-top: 20px;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    width: 100%;
+
+}
+
+.logoInicioRegister{
+    width: 10vw;
+
+}
+
+.mensajeError{
+    font-size: 2vw;
+}
+
+/*<--------------------------PAGE REUBICAR PRODUCTOS---------------------->*/
+
+.tituloTablaReubicarProductos{
+    margin-top: 150px;
+}
+
+.contenedorReubicar {
+    display: grid;
+    grid-template-columns: 70% 28%; /* Deja un 2% de hueco natural */
+    gap: 2%;
+    margin: 30px auto;
+    width: 95vw;
+    max-width: 1300px;
+    align-items: flex-start; /* Evita que el panel derecho se estire o se centre verticalmente */
+}
+
+/* --- PANEL IZQUIERDO: TABLA --- */
+.panelTablaReubicar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contenedorSeleccionarTodos {
+    display: inline-flex;
+    background-color: var(--rosa);
+    color: var(--blanco);
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: fit-content;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contenedorSeleccionarTodos label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.contenedorSeleccionarTodos input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--negro);
+}
+
+.tablaProductosReubicar {
+    background-color: var(--blanco);
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Mantiene los bordes redondeados limpios */
+}
+
+.encabezadoTablaProductosReubicar {
+    background-color: var(--rosa);
+    color: var(--blanco);
+    padding: 15px 10px;
+    font-weight: bold;
+}
+
+.titulosEncabezado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+}
+
+.titulosEncabezado h3 {
+    margin: 0;
+    font-size: 11pt;
+}
+
+.cuerpoTablaReubicar {
+    padding: 10px;
+}
+
+.filaProductoReubicar {
+    margin-bottom: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #eef2f3;
+    border-radius: 6px;
+    padding: 12px 10px;
+    transition: background-color 0.2s ease;
+}
+
+.filaProductoReubicar:hover {
+    background-color: #f1f1f1;
+}
+
+.columnsWithCheckbox {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+}
+
+.checkboxProducto {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--rosa);
+    justify-self: center;
+}
+
+.contenidoProductoReubicar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    align-items: center;
+}
+
+.contenidoProductoReubicar p {
+    margin: 0;
+    font-size: 10.5pt;
+    color: #333;
+}
+
+.contenidoProductoReubicar .sin-asignar {
+    color: #999;
+    font-style: italic;
+}
+
+/* --- PANEL DERECHO: CONTROLES --- */
+.panelControlesReubicar {
+    background-color: var(--blanco);
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    position: sticky; /* Se queda fijo si haces scroll en la tabla */
+    top: 30px; /* Margen superior al hacer scroll */
+    margin-top: 55px; /* Empuja el panel hacia abajo para alinearlo con la cabecera rosa de la tabla */
+    overflow: hidden;
+}
+
+.cabeceraControles {
+    background-color: var(--rosa);
+    color: var(--blanco);
+    padding: 15px;
+    text-align: center;
+}
+
+.cabeceraControles h3 {
+    margin: 0;
+    font-size: 12pt;
+}
+
+.selectoresReubicar {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grupoSelector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.grupoSelector label {
+    font-weight: 600;
+    color: #555;
+    font-size: 10.5pt;
+}
+
+.grupoSelector select {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 11pt;
+    background-color: #fcfcfc;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.grupoSelector select:focus {
+    border-color: var(--rosa);
+}
+
+.btnReubicarProductos {
+    margin-top: 10px;
+    padding: 14px 20px;
+    background-color: var(--rosa);
+    color: var(--blanco);
+    border: none;
+    border-radius: 6px;
+    font-size: 11pt;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.btnReubicarProductos:hover {
+    background-color: var(--negro);
+    transform: translateY(-2px);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 950px) {
+    .contenedorReubicar {
+        grid-template-columns: 1fr;
+    }
+
+    .panelControlesReubicar {
+        position: relative;
+        top: 0;
+        margin-top: 0; /* Reseteamos el margen en la vista móvil para que no quede un hueco vacío */
+    }
+}
+
+@media (max-width: 600px) {
+    .titulosEncabezado {
+        display: none;
+    }
+    
+    .contenidoProductoReubicar {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        text-align: left;
+    }
+    
+    .filaProductoReubicar {
+        padding: 10px;
+    }
+}
+/* =========================================
+   PÁGINA: AlMACENAR PRODUCTOS 
+   ========================================= */
+
+/* 1. TÍTULO SUPERIOR */
+.tituloAlmacenar {
+    font-size: 24px;
+    color: #000;
+    margin: 30px auto; /* Lo separa por arriba y por abajo, y lo centra */
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+}
+
+.formularioAlmacenar {
+    width: 100%;
+    max-width: 900px; 
+    margin: 0 auto 50px auto; /* Centrado en pantalla */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 3. PESTAÑA SUPERIOR (Seleccionar todos) --- */
+.contenedorSeleccionarTodos {
+    background-color: var(--rosa);
+    color: var(--blanco);
+    width: max-content;
+    padding: 12px 20px;
+    border-radius: 8px 8px 0 0;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.contenedorSeleccionarTodos label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contenedorSeleccionarTodos input[type="checkbox"] {
+    transform: scale(1.3);
+    cursor: pointer;
+    margin: 0;
+}
+
+/* --- 4. TABLA PRINCIPAL (Fondo Gris) --- */
+.contenedorAlmacenar {
+    width: 100%;
+}
+
+.tablaProductosAlmacenar {
+    background-color: #e8e8e8; /* Gris clarito para resaltar las filas blancas */
+    border-radius: 0 8px 8px 8px; /* Esquina superior izq recta por la pestaña */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    padding-bottom: 10px; 
+}
+
+/* Encabezado Rosa */
+.encabezadoTablaProductosAlmacenar {
+    background-color: var(--rosa);
+    color: var(--blanco);
+    padding: 14px 10px;
+    border-radius: 0 8px 0 0; 
+}
+
+.columnasTablaAlmacenar {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+}
+
+.columnasTablaAlmacenar h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* --- 5. FILAS BLANCAS (Estilo Tarjeta) --- */
+#listaProductosAlmacenar {
+    padding: 10px 10px 0 10px; 
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Separación entre filas */
+}
+
+.filaProductoAlmacenar {
+    background-color: #ffffff; 
+    border-radius: 6px; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filaProductoAlmacenar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.columnasConCheckboxAlmacenar {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    align-items: center;
+    padding: 12px 10px;
+}
+
+.checkboxProductoAlmacenar {
+    transform: scale(1.3);
+    cursor: pointer;
+    justify-self: center; /* Centra perfectamente la casilla */
+    margin: 0;
+}
+
+.contenidoProductoAlmacenar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    align-items: center;
+}
+
+.contenidoProductoAlmacenar p {
+    margin: 0;
+    color: #333;
+    font-size: 15px;
+}
+
+/* --- 6. BOTÓN INFERIOR (Almacenar) --- */
+.botonAlmacenar {
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: var(--negro);
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botonAlmacenar:hover {
+    background-color: var(--negro);
+    color: var(--blanco);
+    border-color: var(--negro);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+/*<----------------------------FORMULARIOS------------------------------->*/
+
+/* Contenedor central para que el formulario quede en medio de la pantalla */
+.centradoTabla {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+/* Caja principal del formulario */
+.cuadroAdd {
+    /* Añade o modifica esta línea para obligarla a bajar: */
+    margin-top: 100px !important; /* Ajusta este número (80px, 100px, 120px...) según el grosor de tu barra */
+    width: 100%;
+    max-width: 450px;
+    background-color: var(--rosa); 
+    color: var(--blanco);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.cuadroAdd h2 {
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* --- INPUTS Y LABELS --- */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+.cuadroAdd input[type="text"],
+.cuadroAdd input[type="number"], 
+.cuadroAdd select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-sizing: border-box; /* Crucial para evitar que el padding rompa el tamaño */
+    transition: all 0.3s ease;
+}
+
+.cuadroAdd input:focus, 
+.cuadroAdd select:focus {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* --- BOTONES DEL FORMULARIO (ALINEACIÓN PERFECTA) --- */
+.botonesForm {
+    display: flex;
+    gap: 15px;
+    margin-top: 50px; 
+    align-items: stretch; /* Obliga a ambos botones a tener la misma altura pase lo que pase */
+}
+
+/* Reset antibugs de navegadores para inputs y enlaces (Volver / Actualizar / Reset) */
+.botonesForm input[type="submit"],
+.botonesForm input[type="reset"], 
+.btn-volver {
+    flex: 1;
+    margin: 0;               /* Elimina márgenes invisibles del navegador */
+    padding: 0;              
+    height: 50px;            /* Altura fija */
+    line-height: 46px;       /* Centra el texto verticalmente (50px - 4px de los bordes) */
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none; 
+    box-sizing: border-box;  
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    
+    /* Elimina estilos nativos de botones en iOS/Mac/Windows */
+    appearance: none; 
+    -webkit-appearance: none;
+}
+
+/* Botón de Acción Principal (Actualizar / Asignar) */
+.botonesForm input[type="submit"] {
+    background-color: var(--negro);
+    color: var(--blanco);
+    border: 2px solid var(--negro);
+}
+
+.botonesForm input[type="submit"]:hover {
+    color: var(--negro);
+    background-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Botón Secundario (Volver / Reset) */
+.btn-volver,
+.botonesForm input[type="reset"] {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--blanco);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-volver:hover,
+.botonesForm input[type="reset"]:hover {
+    background-color: var(--blanco);
+    color: var(--rosa);
+    transform: scale(1.05);
+}
+
+/* Efecto clic general para todos los botones del formulario */
+.botonesForm input:active, 
+.btn-volver:active {
+    transform: scale(0.95);
+}
+/*<----------------MENÚ LOCALIZACIONES------------->*/
+
+.cuadroAdd h2 {
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+/*<-----------------EDITAR LOCALIZACIONES------------->*/
+.tituloTablaLocalizaciones{
+    text-align: center;
+    margin-top: 30px;
+}
+.tablaLocalizaciones {
+    background-color: var(--rosa);
+    margin: 30px auto;
+    border: 2px solid var(--negro);
+}
+
+.tablaLocalizaciones>a{
+    display: block;
+    background-color: var(--blanco);
+}
+
+/*<----------------------FOOTER-------------------------->*/
+
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background-color: var(--rosa);
+}
+
+footer>h3{
+    padding: 20px 0px 20px 0px;
+    text-align: center;
+    color: var(--blanco);
+}
+
+
+
+
+
