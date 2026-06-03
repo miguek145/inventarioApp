@@ -13,7 +13,7 @@
     
                 <div class="input-group">
                     <label for="stockMin">Stock mínimo:</label>
-                    <input type="number" id="stockMin" name="stockMin" min="1" value="<?= htmlspecialchars($arrayDatosProducto['stockMinimo'])  ?>" required>
+                    <input type="number" id="stockMin" name="stockMin" value="<?= htmlspecialchars($arrayDatosProducto['stockMinimo']) ?>" required>
                 </div>
     
                 <div class="botonesForm">

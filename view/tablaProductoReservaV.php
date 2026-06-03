@@ -27,6 +27,7 @@
                     echo "<div class='filaProductoReserva'>";
                         echo "<div class='contenidoProductoReserva'>";
                             echo "<p><strong>" . htmlspecialchars($valor['nombreProductoReserva']) . "</strong></p>";
+                            // AÑADIDO: Pintamos el nombre del Tipo que nos manda el Modelo
                             echo "<p>" . htmlspecialchars($valor['nombreTipo']) . "</p>";
                             echo "<p>" . htmlspecialchars($valor['stockReserva']) . "</p>";
                         echo "</div>";

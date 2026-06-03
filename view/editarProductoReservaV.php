@@ -35,7 +35,8 @@
 
                 <div class="input-group">
                     <label for="stockReserva">Stock:</label>
-                    <input type="number" name="stockReserva" id="stockReserva" min="1" value="<?= htmlspecialchars($producto['stockReserva']) ?>" required>
+                    <input type="number" name="stockReserva" id="stockReserva" 
+                           value="<?= htmlspecialchars($producto['stockReserva']) ?>" required>
                 </div>
                 
                 <div class="botonesForm">

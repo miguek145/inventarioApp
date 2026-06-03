@@ -31,7 +31,7 @@
             
             <div class="input-group">
                 <label for="stockReserva">Stock:</label>
-                <input type="number" min="1" id="stockReserva" name="stockReserva" placeholder="Ej: 5" required>
+                <input type="number" id="stockReserva" name="stockReserva" placeholder="Ej: 5" min="1" required>
             </div>
             
             <div class="botonesForm">
