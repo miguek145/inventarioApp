@@ -10,7 +10,7 @@
     </p>
     <p>
         <label for="">Stock mínimo:</label>
-        <input type="number" name="stockMin" id="" required>
+        <input type="number" name="stockMin" min="1" id="" required>
     </p>
     <p>
         <label for="">Tipo:</label>
