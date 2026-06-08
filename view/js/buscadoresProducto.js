@@ -23,8 +23,9 @@ botonBuscarProducto.addEventListener("click", (ev) => {
         idTipo: valorIdTipo
     });
 
+    // 🔥 AQUÍ ESTÁ EL CAMBIO: Ruta absoluta desde la raíz del servidor
     // Petición Fetch (Reemplaza por completo a $.ajax)
-    fetch(`../../controller/ajax/buscadorTablaProductos.php?${parametros.toString()}`)
+    fetch(`/inventarioApp/controller/ajax/buscadorTablaProductos.php?${parametros.toString()}`)
         .then(response => {
             // Comprobamos si el servidor respondió correctamente (status 200)
             if (!response.ok) {

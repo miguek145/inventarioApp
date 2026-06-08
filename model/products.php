@@ -161,7 +161,7 @@
 
             // 2. Bucle para crear dinámicamente cada unidad individual
             while($stockActual > 0){
-                // CORREGIDO: Tabla 'unidadproducto', columna 'numeroIdentificativo' y añadida 'fechaActualizacion'
+                
                 $consultainsertarProductosUnitarios = $conexionDB->prepare("INSERT INTO unidadproducto (FK_producto, numeroIdentificativo, fechaActualizacion) VALUES (?, ?, ?)");
                 $consultainsertarProductosUnitarios->execute([$idProducto, $contadorIdentificadorProductoUnitario, $fechaHoy]);
                 

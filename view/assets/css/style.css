@@ -1687,5 +1687,89 @@ footer>h3{
 
 
 
+/*<----------------------ESTILOS MOSTRAR QR ------------------->*/
+
+.contenedorqr{
+    margin: auto;
+    margin-top:250px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    background-color: var(--rosa);
+    width: 350px;
+    border-radius: 10px;
+    padding: 20px 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.contenedorqr h2{
+    color: var(--blanco);
+    margin-bottom: 20px;
+}
+
+/*<--------------------- ESTILOS MOSTRAR DATOS QR --------------->*/
+
+.contenedorDatosQR{
+    margin: auto;
+    margin-top:250px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    background-color: var(--rosa);
+    width: 350px;
+    border-radius: 10px;
+    padding: 20px 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.contenedorDatosQR h2{
+    color: var(--blanco);
+    margin-bottom: 20px;
+}
+
+.contenedorDatosQR p{
+    color: var(--blanco);
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.btn-imprimir{
+    margin-top: 20px;
+    background-color: var(--blanco);
+    color: var(--rosa);
+    border-radius: 7px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+
+}
+
+@media print{
+    body * {
+        visibility: hidden;
+    }
+
+    #zona-imprimir, #zona-imprimir * {
+        visibility: visible;
+    }
+
+    #zona-imprimir {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .no-print,
+    .btn-imprimir {
+        display: none !important;
+    }
+}
+
+
+
+
 
 

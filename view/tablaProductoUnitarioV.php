@@ -12,8 +12,11 @@
     <a class="btn-superior" href="./reubicarProductoUnitarioController.php?idProducto=<?php echo $_GET['idProducto']; ?>">
         Reubicar
     </a>
-    <a class="btn-superior btn-almacenar" href="almacenarProductoUnitarioController.php?idProducto=<?php echo $_GET['idProducto'];?>">
+    <a class="btn-superior btn-almacenar" href="./almacenarProductoUnitarioController.php?idProducto=<?php echo $_GET['idProducto'];?>">
         Almacenar
+    </a>
+    <a class="btn-superior btn-almacenar" href="./imrpimirQrsController.php?idProducto=<?php echo $_GET['idProducto'];?>">
+        Imprimir QRs
     </a>
 </div>
 

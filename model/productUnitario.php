@@ -3,7 +3,7 @@
 
    class ProductoUnitario{
 
-        public static function cargarTablaProductosUnitarios(int $idProducto) {
+        public static function cargarDatosProductosUnitarios(int $idProducto) {
 
             $conexionDB=ConexionDB::conectar();
             
@@ -291,41 +291,6 @@
                 return "Error en la base de datos al reubicar: " . $e->getMessage() . "";
             }
         }
-
-       public static function obtenerProductoUnitarioPorId(int $idProductoUnitario) {
-            $conexionDB = ConexionDB::conectar();
-
-            $consulta = $conexionDB->prepare("SELECT * FROM unidadproducto WHERE idProductoUnitario = ?");
-            $consulta->execute([$idProductoUnitario]);
-
-            // fetch() devolverá el array asociativo si lo encuentra, o 'false' si no hay coincidencias
-            $productoUnitario = $consulta->fetch(PDO::FETCH_ASSOC);
-            
-            $conexionDB = null;
-            
-            return $productoUnitario; 
-        }
-
-        public static function cargarNombreProductoAulaLocalizacion(array $productoUnitario) {
-            $conexionDB = ConexionDB::conectar();
-
-            // Consulta preparada corregida: tablas 'aulas' y 'localizaciones' en plural
-            $consulta = $conexionDB->prepare("SELECT p.nombreProducto, a.nombreAula, l.nombreLocalizacion 
-                                                FROM unidadproducto up 
-                                                JOIN productos p ON up.FK_producto = p.idProducto 
-                                                JOIN aulas a ON p.FK_aula = a.idAula 
-                                                JOIN localizaciones l ON a.FK_localizacion = l.idLocalizacion 
-                                                WHERE up.idProductoUnitario = ?");
-                                                
-            $consulta->execute([$productoUnitario['idProductoUnitario']]);
-
-            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
-
-            $conexionDB = null;
-
-            return $resultado; // Devuelve un array con 'nombreProducto', 'nombreAula' y 'nombreLocalizacion'
-        }
    }
-
 
 ?>

@@ -18,7 +18,7 @@
     $idProductoUnitario = (int) analizadorFormulario($_GET['idProductoUnitario']);
     
     // 2. PEDIMOS LOS DATOS ORIGINALES DEL PRODUCTO
-    $producto = ProductoUnitario::obtenerProductoUnitarioPorId($idProductoUnitario);
+    $producto = ProductoUnitario::cargarDatosProductosUnitarios($idProductoUnitario);
 
     // 3. PROCESAMIENTO DEL FORMULARIO
     if(isset($_POST['actualizar'])){

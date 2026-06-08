@@ -14,13 +14,8 @@
     $idProducto=analizadorFormulario($_GET['idProducto']);
 
     //Obtenemos los datos de la tabla producto unitario
-    $arrayProductosUnitarios=ProductoUnitario::cargarTablaProductosUnitarios($idProducto);
+    $arrayProductosUnitarios=ProductoUnitario::cargarDatosProductosUnitarios($idProducto);
     
-    if(is_array($arrayProductosUnitarios)){
-        //Obtenemos el nombre del producto, aula y localización para mostrarlo en el título de la página
-        $arrayNombreProductoAulaLocalizacion=ProductoUnitario::cargarNombreProductoAulaLocalizacion($arrayProductosUnitarios[0]);
-    }
-
     //Obtenemos el idTipo del producto para la ruta del botón volver
     require_once "../model/products.php";
     $datosProducto=Productos::cargarInfoFormEditProducto($idProducto);

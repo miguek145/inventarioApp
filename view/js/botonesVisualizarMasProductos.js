@@ -6,8 +6,8 @@ var elementoTipo = document.getElementById("nombreTipoProductos");
 // Empezamos en 10 porque al cargar la página ya hay 10 mostrados.
 var offsetProductos = 10; 
 
-// Ruta común del archivo PHP de AJAX
-const urlAjax = '../../controller/ajax/botonesMoverVisualziarProductosTabla.php';
+//  Ruta absoluta desde la raíz del servidor
+const urlAjax = '/inventarioApp/controller/ajax/botonesMoverVisualziarProductosTabla.php';
 
 // ==========================================
 // BOTÓN SIGUIENTE

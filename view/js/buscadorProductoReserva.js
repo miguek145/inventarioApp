@@ -1,4 +1,3 @@
-console.log("Buscador cargado correctamente");
 var inputBuscador = document.getElementById("inputBuscador");
 var contenedorFilas = document.getElementById("contenedorFilas");
 
@@ -13,8 +12,9 @@ inputBuscador.addEventListener("input", (ev) => {
         buscar: valorBusqueda
     });
 
+    // Ruta absoluta desde la raíz del servidor
     // Petición Fetch idéntica a tu modelo (espera código HTML)
-    fetch(`../../controller/ajax/buscadorProductoReserva.php?${parametros.toString()}`)
+    fetch(`/inventarioApp/controller/ajax/buscadorProductoReserva.php?${parametros.toString()}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Error en la respuesta del servidor");

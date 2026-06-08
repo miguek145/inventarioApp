@@ -9,11 +9,10 @@
             $conexionDB = ConexionDB::conectar();
             
             // MODIFICADO: Añadimos un JOIN para traernos también el nombreTipo
-            $consultaTablaProductosReserva = $conexionDB->prepare("
-                SELECT pr.idProductoReserva, pr.nombreProductoReserva, pr.stockReserva, t.nombreTipo 
-                FROM productoreserva pr
-                LEFT JOIN tipos t ON pr.FK_tipo = t.idTipo
-            ");
+            $consultaTablaProductosReserva = $conexionDB->prepare("SELECT pr.idProductoReserva, pr.nombreProductoReserva, pr.stockReserva, t.nombreTipo 
+                                                                    FROM productoreserva pr
+                                                                    LEFT JOIN tipos t ON pr.FK_tipo = t.idTipo
+                                                                    ");
             $consultaTablaProductosReserva->execute();
 
             if($consultaTablaProductosReserva->rowCount() > 0) {
@@ -128,66 +127,66 @@
             return $registro;
         }
 
-public static function asignarProductoReserva(int $idProductoReserva, int $cantidadAsignar, int $idAula, int $stockMinimo = 1){
-        try {
-            $conexionDB = ConexionDB::conectar(); 
-            $conexionDB->beginTransaction();
+        public static function asignarProductoReserva(int $idProductoReserva, int $cantidadAsignar, int $idAula, int $stockMinimo = 1){
+            try {
+                $conexionDB = ConexionDB::conectar(); 
+                $conexionDB->beginTransaction();
 
-            $consultaProductoReserva = $conexionDB->prepare("SELECT * FROM productoreserva WHERE idProductoReserva=?");
-            $consultaProductoReserva->execute([$idProductoReserva]);
-            $registroProductoReserva = $consultaProductoReserva->fetch(PDO::FETCH_ASSOC);
+                $consultaProductoReserva = $conexionDB->prepare("SELECT * FROM productoreserva WHERE idProductoReserva=?");
+                $consultaProductoReserva->execute([$idProductoReserva]);
+                $registroProductoReserva = $consultaProductoReserva->fetch(PDO::FETCH_ASSOC);
 
-            if(!$registroProductoReserva){
-                $conexionDB->rollBack(); 
-                $conexionDB = null;
-                return "El producto de reserva no existe";
-            }
-            
-            if($registroProductoReserva['stockReserva'] < $cantidadAsignar){ 
-                $conexionDB->rollBack(); 
-                $conexionDB = null;
-                return "No hay stock suficiente en almacén";
-            }
-
-            // Restamos el stock del almacén
-            $registroProductoReserva['stockReserva'] -= $cantidadAsignar;
-            $nuevoStock = $registroProductoReserva['stockReserva'];
-
-            $updateStock = $conexionDB->prepare("UPDATE productoreserva SET stockReserva=? WHERE idProductoReserva=?");
-            $updateStock->execute([$nuevoStock, $idProductoReserva]);
-
-            // Comprobamos si el producto ya existe en ese aula
-            $consultaProducto = $conexionDB->prepare("SELECT * FROM productos WHERE FK_productoReserva=? AND FK_aula=?");
-            $consultaProducto->execute([$idProductoReserva, $idAula]);
-            
-            $registroProducto = $consultaProducto->fetch(PDO::FETCH_ASSOC);
-
-            if($registroProducto){
-                // 🚨 SI YA EXISTE: Sumamos el stock (ignoramos el stock mínimo)
-                Productos::actualizarStockProducto($conexionDB, $registroProducto['idProducto'], $cantidadAsignar);
+                if(!$registroProductoReserva){
+                    $conexionDB->rollBack(); 
+                    $conexionDB = null;
+                    return "El producto de reserva no existe";
+                }
                 
-                $conexionDB->commit();
-                $conexionDB = null;
-                return "Producto asignado y stock actualizado correctamente";
-            }
-            else{
-                // 🚨 SI ES NUEVO: Creamos el producto pasándole el $stockMinimo recogido del formulario
-                $nombreProductoOriginal = $registroProductoReserva['nombreProductoReserva'];
+                if($registroProductoReserva['stockReserva'] < $cantidadAsignar){ 
+                    $conexionDB->rollBack(); 
+                    $conexionDB = null;
+                    return "No hay stock suficiente en almacén";
+                }
 
-                Productos::crearProductoDesdeReserva($conexionDB, $nombreProductoOriginal, $cantidadAsignar, $stockMinimo, $idAula, $idProductoReserva);
+                // Restamos el stock del almacén
+                $registroProductoReserva['stockReserva'] -= $cantidadAsignar;
+                $nuevoStock = $registroProductoReserva['stockReserva'];
 
-                $conexionDB->commit();
-                $conexionDB = null;
-                return "Producto creado y asignado de forma correcta";
-            }
+                $updateStock = $conexionDB->prepare("UPDATE productoreserva SET stockReserva=? WHERE idProductoReserva=?");
+                $updateStock->execute([$nuevoStock, $idProductoReserva]);
 
-        } catch (Exception $e) {
-            if (isset($conexionDB) && $conexionDB->inTransaction()) {
-                $conexionDB->rollBack();
+                // Comprobamos si el producto ya existe en ese aula
+                $consultaProducto = $conexionDB->prepare("SELECT * FROM productos WHERE FK_productoReserva=? AND FK_aula=?");
+                $consultaProducto->execute([$idProductoReserva, $idAula]);
+                
+                $registroProducto = $consultaProducto->fetch(PDO::FETCH_ASSOC);
+
+                if($registroProducto){
+                    // 🚨 SI YA EXISTE: Sumamos el stock (ignoramos el stock mínimo)
+                    Productos::actualizarStockProducto($conexionDB, $registroProducto['idProducto'], $cantidadAsignar);
+                    
+                    $conexionDB->commit();
+                    $conexionDB = null;
+                    return "Producto asignado y stock actualizado correctamente";
+                }
+                else{
+                    // 🚨 SI ES NUEVO: Creamos el producto pasándole el $stockMinimo recogido del formulario
+                    $nombreProductoOriginal = $registroProductoReserva['nombreProductoReserva'];
+
+                    Productos::crearProductoDesdeReserva($conexionDB, $nombreProductoOriginal, $cantidadAsignar, $stockMinimo, $idAula, $idProductoReserva);
+
+                    $conexionDB->commit();
+                    $conexionDB = null;
+                    return "Producto creado y asignado de forma correcta";
+                }
+
+            } catch (Exception $e) {
+                if (isset($conexionDB) && $conexionDB->inTransaction()) {
+                    $conexionDB->rollBack();
+                }
+                return "Error en la asignación: " . $e->getMessage();
             }
-            return "Error en la asignación: " . $e->getMessage();
         }
-    }
 
         public static function agregarStockProductoReserva(int $idProductoReserva, int $cantidadAgregar){
 
@@ -212,7 +211,7 @@ public static function asignarProductoReserva(int $idProductoReserva, int $canti
             }
         }
 
-        public static function liberarProductoReserva(array $arrayIdProductosUnitarios){
+        public static function almacenarProductoReserva(array $arrayIdProductosUnitarios){
 
             try {
                 $conexionDB = ConexionDB::conectar();

@@ -5,7 +5,8 @@ var idProductoReserva = inputOculto ? inputOculto.value : null;
 function comprobarExistenciaAula(idAula) {
     if (!idAula || !idProductoReserva) return;
 
-    fetch(`../../controller/ajax/comprobarParaAparecerInputStockMinimo.php?idProductoReserva=${idProductoReserva}&idAula=${idAula}`)
+    //Ruta absoluta desde la raíz del servidor
+    fetch(`/inventarioApp/controller/ajax/comprobarParaAparecerInputStockMinimo.php?idProductoReserva=${idProductoReserva}&idAula=${idAula}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Error en la respuesta del servidor");

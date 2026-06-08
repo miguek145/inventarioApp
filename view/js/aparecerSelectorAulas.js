@@ -1,11 +1,11 @@
-
 var selectorLocalizaciones = document.getElementById("localizaciones");
 var contenedorAulas = document.getElementById("contenedorAulas");
 
 selectorLocalizaciones.addEventListener("change", () => {
     var idLocalizacion = selectorLocalizaciones.value;
     
-    fetch(`../../controller/ajax/obtenerDatosSelectorAulas.php?idLocalizacion=${idLocalizacion}`)
+    //Ruta absoluta desde la raíz del servidor 
+    fetch(`/inventarioApp/controller/ajax/obtenerDatosSelectorAulas.php?idLocalizacion=${idLocalizacion}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Error en la respuesta del servidor");
